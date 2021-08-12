@@ -2,33 +2,13 @@ import React, { useState ,useEffect} from "react" ;
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import FinalPage from './FinalPage';
-
-
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CardHeader from '@material-ui/core/CardHeader';
-import AppBar from '@material-ui/core/AppBar';
-import StarIcon from '@material-ui/icons/StarBorder';
-import Toolbar from '@material-ui/core/Toolbar';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import Checkbox from '@material-ui/core/Checkbox';
-
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
 function PricePage(props){
 
@@ -67,7 +47,7 @@ function PricePage(props){
 
     function getDemo(){
       window.location.href = 'https://slicksoftware.pt/prototype/';
-      //
+    
       
   }
 

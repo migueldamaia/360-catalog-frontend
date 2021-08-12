@@ -10,27 +10,24 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import protoImg from './static/38.png';
-
+import Grid from '@material-ui/core/Grid';
 
 function Main(props){
     
     
 
     const useStyles = makeStyles((theme) => ({
-        root: {
-          flexGrow: 1,
-        },
-        field: {
-          
-        },
-        cardrRoot: {
-          maxWidth: 345,
-        },
-        media: {
-          height: 600,
-        }
+      root: {
+        maxWidth: 345,
+      },
+      media: {
+        height: 140,
+      },
+      cont:{
+        style:"text-align:center",
+      
+      }
       }));
 
       const classes = useStyles();
@@ -55,12 +52,28 @@ function Main(props){
     return(
   
 
-<div>
+<div >
 
-    <div>
+    <div className={classes.cont}>
+      
+    <Grid
+    
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justify="center"
+  style={{ minHeight: '100vh' }}
+ >
+
+<Grid item xs={3}>
+<Typography variant="h5" component="h1" color="textPrimary" >We turn your catalogs into 360</Typography>
+</Grid>
+
+<Grid item xs={3}>
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
+        <CardMedia height={'30px'}
           className={classes.media}
           image={protoImg}
           title="Car 360 Prototype"
@@ -75,15 +88,17 @@ function Main(props){
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Button onClick={getDemo} variant="contained" color="primary">
+      <Button onClick={getDemo} color="secondary"  type="submit" variant="contained">
         See Demo
     </Button>
-    <Button onClick={getForm} variant="contained" color="primary">
+    <Button onClick={getForm} color="secondary"  type="submit" variant="contained">
   Calculate your price
 </Button>
 
       </CardActions>
     </Card>
+    </Grid>
+    </Grid>
     
    
     </div>

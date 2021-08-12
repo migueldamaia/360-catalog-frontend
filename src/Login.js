@@ -5,25 +5,10 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 
 
 function Login(){
@@ -45,7 +30,7 @@ function Login(){
     
     var state = { token: "" }
     const url = 'https://catalog-360-funnel-api.herokuapp.com/';
-    const urlLocal = "http://localhost:8080/"
+    //const urlLocal = "http://localhost:8080/"
 
     const [loginInfo, setLogin] = useState({
         username: "",

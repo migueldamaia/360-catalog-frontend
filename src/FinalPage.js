@@ -29,7 +29,7 @@ function FinalPage(props){
         <div className="App">
         <Container   component="main">
            <Grid align="center" container spacing={5} >
-           <Typography variant="h4" color="textSecondary">
+           <Typography variant="h4" color="textPrimary">
         Great!
         Check your inbox, you should have received an email with the price offer! 
         </Typography>
