@@ -3,7 +3,31 @@ import React, { useState ,useEffect} from "react"
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import PricePage from './PricePage';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import CardHeader from '@material-ui/core/CardHeader';
+import AppBar from '@material-ui/core/AppBar';
+import StarIcon from '@material-ui/icons/StarBorder';
+import Toolbar from '@material-ui/core/Toolbar';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import Checkbox from '@material-ui/core/Checkbox';
 
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 function App(props) {
 
@@ -14,7 +38,68 @@ function App(props) {
   const url = 'https://catalog-360-funnel-api.herokuapp.com/';
   const urlLocal = "http://localhost:8080/";
 
-  
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    field: {
+      
+    },
+    cardrRoot: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 140,
+    },
+
+
+    '@global': {
+      ul: {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
+    },
+    appBar: {
+      borderBottom: `1px solid ${theme.palette.divider}`,
+    },
+    toolbar: {
+      flexWrap: 'wrap',
+    },
+    toolbarTitle: {
+      flexGrow: 1,
+    },
+    link: {
+      margin: theme.spacing(1, 1.5),
+    },
+    heroContent: {
+      padding: theme.spacing(8, 0, 6),
+    },
+    cardHeader: {
+      backgroundColor:
+        theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
+    },
+    cardPricing: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'baseline',
+      marginBottom: theme.spacing(2),
+    },
+    footer: {
+      borderTop: `1px solid ${theme.palette.divider}`,
+      marginTop: theme.spacing(8),
+      paddingTop: theme.spacing(3),
+      paddingBottom: theme.spacing(3),
+      [theme.breakpoints.up('sm')]: {
+        paddingTop: theme.spacing(6),
+        paddingBottom: theme.spacing(6),
+      },
+    },
+    
+
+  }));
+
+  const classes = useStyles();
 
   const headers = {
     "Authorization":props.token,
@@ -102,6 +187,9 @@ function App(props) {
     email:""
   })
 
+  const [nameError,setNameError] = useState(false);
+  const [businessNameError,setBusinessNameError] = useState(false);
+  const [emailError,setemailError] = useState(false);
   
 
   const [count, setCount] = useState(1)
@@ -141,6 +229,57 @@ function App(props) {
     }
 
     
+  }
+
+  function moveForward(){
+ 
+
+    if(count === 1){
+      
+
+
+        if(form.name == ''){
+          setNameError(true);
+         
+        }
+
+        if(form.businessName == ''){
+          setBusinessNameError(true);
+         
+        }
+
+        if(form.email == ''){
+          setemailError(true);
+          
+        }
+
+        if(form.name != '' && form.businessName != '' && form.email != ''){
+          setNameError(false);
+          setBusinessNameError(false);
+          setemailError(false);
+          setCount(count + 1);
+        }
+        
+
+          
+    }
+
+    if(count === 2){
+      if(form.serviceTypes.length === 0){
+        alert('Sure you dont want any service?')
+      }
+
+      else{
+        setCount(count + 1);
+      }
+    }
+
+    if(count === 3){
+      
+
+        setCount(count + 1);
+      
+    }
   }
   
 
@@ -219,92 +358,138 @@ function sendform(){
 
     <div className="App">
       
-      <h1 style={{display:isFinalPage ? "none" : "inline"}}>Step {count} of 3</h1>
-      
+      <Typography style={{display:isFinalPage ? "none" : "inline"}} gutterBottom variant="h5" component="h1">
+          Step {count} of 3
+          </Typography>
       <form
         className="col-4 form"
         style={{display:isFinalPage ? "none" : "inline"}}
         target='_self'
       >
         {count === 1 ? (
-          <div className="form-group">
-            <label>Your name</label>
-            <input
-              className="form-control"
-              name="name"
-              onChange={updateForm}
-              value={form.name}
-            />
-            <label>Name of your business</label>
-            <input
-              className="form-control"
-              name="businessName"
-              onChange={updateForm}
-              value={form.businessName}
-            />
-            
-          <label>Your email</label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            onChange={updateForm}
-            value={form.email}
-          />
+          <Container className={classes.container} maxWidth="xs">
           
-          </div>
+          <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                  <OutlinedInput
+          className={classes.field}
+           required
+          placeholder={'Your Name'}
+          className="form-control"
+           name="name"
+            type={ 'text' }
+            value={form.name}
+            onChange={updateForm}
+            labelWidth={70}
+            error={nameError}
+          />
+                  </Grid>
+                  <Grid item xs={12}>
+                  <OutlinedInput
+         required
+          placeholder={'Name of your business'}
+          className="form-control"
+           name="businessName"
+            type={ 'text' }
+            value={form.businessName}
+            onChange={updateForm}
+            labelWidth={70}
+            error={businessNameError}
+          />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                  <OutlinedInput
+        required
+          placeholder={'Your email'}
+          className="form-control"
+           name="email"
+            type={ 'text' }
+            value={form.email}
+            onChange={updateForm}
+            labelWidth={70}
+            error={emailError}
+          />
+                  </Grid>
+
+                </Grid>
+              </Grid>
+              
+            </Grid>
+        </Container>
         ) : null}
         {count === 2 ? (
-          <div className="form-group">
-            <label>Select the services you need to present your products in a 360 View</label>
-            <label>To convert your catalog into 360 you have several  processes including <br></br> 360 photgraphy and software integrations to display and <br></br> allow your clients to interact with your product</label>
-            <ul>
-              {
-
-              serviceTypesArray.map(serviceType => (
-
-                
-              
-              <li ><input type="checkbox"   name="serviceTypes"
+           <Container maxWidth="md" component="main">
+           <Grid container spacing={5} alignItems="flex-end">
+             {serviceTypesArray.map((serviceType) => (
+               // Enterprise card is full width at sm breakpoint
+               <Grid item key={serviceType.id} xs={12} sm md={4}>
+                 <Card>
+                   <CardHeader
+                     title={serviceType.name}
+                   />
+                   <CardContent>
+                     <div className={classes.cardPricing}>
+                     <Checkbox type="checkbox"   name="serviceTypes"
                           onChange={updateServices}
                           value={serviceType.name}/>
-                <label for="cb1">{serviceType.name}</label>
-              </li>
-
-              ))
-              }
-            </ul>
-          </div>
+                     </div>
+                     
+                   </CardContent>
+                   <CardActions>
+                     <Button fullWidth  color="primary">
+                       
+                     </Button>
+                   </CardActions>
+                 </Card>
+               </Grid>
+             ))}
+           </Grid>
+         </Container>
         ) : null}
         {count === 3 ? (
           <div className="form-group">
-            <label>Select your product type</label>
-            <select defaultInputValue={productTypesArray[0].name} name="product_type" id="product_type" onChange={updateForm} value={form.product_type}>
+
+<table align="center">
+
+<tr>
+    <th>
+            <InputLabel>Select your product type</InputLabel>
+            <Select color="secondary"  defaultInputValue={productTypesArray[0].name} name="product_type" id="product_type" onChange={updateForm} value={form.product_type}>
             {
               productTypesArray.map(productType => ( 
-                <option key={productType.id} value={productType.name}>{productType.name}</option>))
+                <MenuItem key={productType.id} value={productType.name}>{productType.name}</MenuItem>))
               }
              
-            </select>
-            
-            <label>Select the number of products in your catalog</label>
-            <select defaultInputValue={productQuantityArray[0].name} name="product_quantity" id="product_quantity" onChange={updateForm} value={form.product_quantity}>
+            </Select>
+    </th>
+    <th>
+            <InputLabel>Select the number of products in your catalog</InputLabel>
+            <Select color="secondary" defaultInputValue={productQuantityArray[0].name} name="product_quantity" id="product_quantity" onChange={updateForm} value={form.product_quantity}>
             {
               productQuantityArray.map(prodQuant => ( 
-                <option key={prodQuant.id} value={prodQuant.name}>{prodQuant.name}</option>))
+                <MenuItem color="secondary"  key={prodQuant.id} value={prodQuant.name}>{prodQuant.name}</MenuItem>))
               }
               
-            </select>
+            </Select>
+    </th>
 
-            <label>Select the nearest location to your business</label>
-            <select defaultInputValue={"portooo"} name="form_location" id="form_location" onChange={updateForm} value={form.form_location}>
+    <th>
+            <InputLabel>Select the nearest location to your business</InputLabel>
+            <Select color="secondary"  defaultInputValue={"portooo"} name="form_location" id="form_location" onChange={updateForm} value={form.form_location}>
             
             {
               
               locationArray.map(location => ( 
-                <option key={location.id} value={location.name}>{location.name}</option>))
+                <MenuItem key={location.id} value={location.name}>{location.name}</MenuItem>))
               }
-            </select>
+            </Select>
+
+            </th>
+            </tr>
+            </table>
           </div>
 
         ) : null}
@@ -318,30 +503,31 @@ function sendform(){
 
           {count === 3 ? (
           <div className="form-group">
-           <button onClick={sendform}>Confirm</button>
+           <Button className="btn btn-dark"   variant="contained" color="secondary" onClick={sendform}>Submit Form</Button>
           </div>
         ):null}
 
-          <button
-        className="btn btn-dark"
-        type="submit"
-        formTarget="_self"
-        onClick={() => setCount(count - 1)}
-        disabled={count < 2}
-        style={{display:isFinalPage ? "none" : "inline"}}
-      >
-        Back
-      </button>
-      <button
-        className="btn btn-light"
-        type="submit"
-        onClick={() => setCount(count + 1)}
-        disabled={count > 2}
-        style={{display:isFinalPage ? "none" : "inline"}}
-        
-      >
-        Next
-      </button>
+
+
+
+
+        <table align="center">
+  <tr>
+    <th><Button  className="btn btn-dark" onClick={() => setCount(count - 1)} disabled={count < 2} variant="contained" color="secondary" style={{display:isFinalPage ? "none" : "inline"}}>
+Back
+</Button></th>
+    <th><Button  className="btn btn-light"  onClick={moveForward} disabled={count > 2} variant="contained" color="secondary" style={{display:isFinalPage ? "none" : "inline"}}>
+Next
+</Button></th>
+    
+  </tr>
+</table>
+      
+           
+         
+
+
+
     </div>
   );
 }
